@@ -1,0 +1,293 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Unit 2 Expansion Deck</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: a desk with one ruled index card in the middle, a typed label strip above, and a card catalog list below */
+:root{
+  --desk:#d7dfe3;
+  --desk-ink:#2b3a44;
+  --muted:#5d6e78;
+  --card:#fdfdfb;
+  --rule:#b7d0e6;
+  --margin:#d2524a;
+  --ink:#1f3b73;
+  --line:#c3ced4;
+  --chip:#eef2f4;
+  --good:#2f7a4f;
+  --warn:#b0611c;
+  --shadow:0 1px 0 rgba(30,45,55,.08),0 10px 24px -12px rgba(30,45,55,.35);
+  --f-type:"Libre Caslon Text",Georgia,"Times New Roman",serif;
+  --f-hand:var(--f-type);
+  --f-ui:var(--f-type);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --desk:#182026;--desk-ink:#dbe4e9;--muted:#93a4ae;--card:#232c33;--rule:#33495c;--margin:#c45b54;--ink:#a9c4f2;--line:#34424b;--chip:#222b31;--good:#6cc493;--warn:#e0a065;
+  --shadow:0 1px 0 rgba(0,0,0,.3),0 12px 28px -14px rgba(0,0,0,.8);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --desk:#182026;--desk-ink:#dbe4e9;--muted:#93a4ae;--card:#232c33;--rule:#33495c;--margin:#c45b54;--ink:#a9c4f2;--line:#34424b;--chip:#222b31;--good:#6cc493;--warn:#e0a065;
+  --shadow:0 1px 0 rgba(0,0,0,.3),0 12px 28px -14px rgba(0,0,0,.8);color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--desk);color:var(--desk-ink);font-family:var(--f-ui);font-size:15px;line-height:1.5}
+.wrap{max-width:760px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:22px}
+
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;border-bottom:2px solid var(--desk-ink);padding-bottom:12px}
+.label-strip{font-family:var(--f-type);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--f-type);font-weight:700;font-size:clamp(24px,5vw,32px);line-height:1.15;margin:4px 0 0;text-wrap:balance}
+.owner{font-family:var(--f-type);font-size:20px;font-weight:700;letter-spacing:.04em;color:var(--desk-ink);white-space:nowrap;text-align:right}
+.owner small{display:block;font-family:var(--f-type);font-size:11px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+.controls{display:flex;flex-direction:column;gap:10px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.row .lbl{font-family:var(--f-type);font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);width:64px}
+button{font:inherit;color:inherit;cursor:pointer}
+.chip{background:var(--chip);border:1px solid var(--line);border-radius:3px;padding:5px 11px;font-size:14px}
+.chip[aria-pressed="true"]{background:var(--desk-ink);color:var(--desk);border-color:var(--desk-ink)}
+.chip:focus-visible,.btn:focus-visible,.card:focus-visible{outline:2px solid var(--margin);outline-offset:3px}
+
+.meta{display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--f-type);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{flex:1;height:6px;background:var(--line);border-radius:3px;overflow:hidden;max-width:260px}
+.bar i{display:block;height:100%;background:var(--good);width:0;transition:width .3s}
+
+.stage{perspective:1600px}
+.card{position:relative;width:100%;height:clamp(340px,52vh,440px);cursor:pointer;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.3,.7,.2,1)}
+.card.flipped{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);box-shadow:var(--shadow);border-radius:2px;
+  background-image:linear-gradient(var(--card),var(--card)),repeating-linear-gradient(to bottom,transparent 0 29px,var(--rule) 29px 30px);
+  background-size:100% 58px,100% 100%;background-repeat:no-repeat,repeat;background-position:0 0,0 0;display:flex;flex-direction:column}
+.face::before{content:"";position:absolute;left:0;right:0;top:57px;height:2px;background:var(--margin);opacity:.8}
+.back{transform:rotateY(180deg)}
+.top{height:58px;display:flex;justify-content:space-between;align-items:center;padding:0 20px;font-family:var(--f-type);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.stamp{font-family:var(--f-type);font-weight:700;color:var(--margin);border:1.5px solid var(--margin);padding:1px 7px;border-radius:2px;transform:rotate(4deg);letter-spacing:.05em}
+.front .body{flex:1;display:flex;align-items:center;justify-content:center;padding:20px 28px 40px;text-align:center}
+.term{font-family:var(--f-type);font-weight:700;font-size:clamp(24px,5.4vw,36px);line-height:1.2;text-wrap:balance;margin:0}
+.hint{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-family:var(--f-type);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.back .body{flex:1;overflow-y:auto;padding:0 24px 18px 24px;font-family:var(--f-hand);color:var(--ink);font-size:16px;line-height:30px}
+.back .body p{margin:0}
+.back .bterm{font-family:var(--f-type);font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--margin);line-height:30px}
+.done-tick{color:var(--good)}
+
+.nav{display:grid;grid-template-columns:auto 1fr 1fr auto;gap:8px}
+.btn{background:var(--card);border:1px solid var(--line);border-radius:3px;padding:10px 14px;font-size:14px;font-weight:500;box-shadow:0 1px 0 var(--line)}
+.btn.learn{color:var(--warn)}
+.btn.know{color:var(--good)}
+@media (max-width:480px){.nav{grid-template-columns:1fr 1fr}.nav .prev{order:3}.nav .next{order:4}.row .lbl{width:100%}}
+.keys{font-family:var(--f-type);font-size:12px;color:var(--muted);text-align:center}
+kbd{font-family:var(--f-type);border:1px solid var(--line);border-bottom-width:2px;border-radius:3px;padding:0 5px;background:var(--card)}
+
+.empty{display:flex;align-items:center;justify-content:center;height:100%;padding:24px;text-align:center;font-family:var(--f-hand);font-size:22px;color:var(--ink)}
+
+.catalog{border-top:2px solid var(--desk-ink);padding-top:14px;display:flex;flex-direction:column;gap:10px}
+.catalog h2{font-family:var(--f-type);font-size:18px;margin:0;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.list{display:flex;flex-direction:column;background:var(--card);box-shadow:var(--shadow)}
+.item{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.item:last-child{border-bottom:0}
+.item .lv{font-family:var(--f-type);font-weight:700;color:var(--margin);font-size:13px;padding-top:2px}
+.item b{font-family:var(--f-type);display:block}
+.item span{color:var(--muted);font-size:14px}
+.item.known b::after{content:" ✓";color:var(--good)}
+footer{font-family:var(--f-type);font-size:12px;color:var(--muted);text-align:center}
+@media (prefers-reduced-motion:reduce){.card{transition:none}.bar i{transition:none}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <div class="label-strip">AP United States History &nbsp;/&nbsp; Unit 2 &nbsp;/&nbsp; 1860 to 1918</div>
+      <h1>Western &amp; Overseas Expansion</h1>
+    </div>
+    <div class="owner"><small>Prepared by</small>Andrew Kim</div>
+  </header>
+
+  <section class="controls" aria-label="Filters">
+    <div class="row" id="setRow"><span class="lbl">Set</span>
+      <button class="chip" data-set="all" aria-pressed="true">All</button>
+      <button class="chip" data-set="w" aria-pressed="false">Western</button>
+      <button class="chip" data-set="o" aria-pressed="false">Overseas</button>
+      <button class="chip" data-set="q" aria-pressed="false">Guiding Questions</button>
+    </div>
+    <div class="row" id="lvlRow"><span class="lbl">Level</span>
+      <button class="chip" data-lv="1" aria-pressed="true">Level 1</button>
+      <button class="chip" data-lv="2" aria-pressed="true">Level 2</button>
+      <button class="chip" data-lv="3" aria-pressed="true">Level 3</button>
+      <span style="flex:1"></span>
+      <button class="chip" id="hideKnown" aria-pressed="false">Hide Mastered Terms</button>
+      <button class="chip" id="shuffle" aria-pressed="false">Randomize Order</button>
+    </div>
+  </section>
+
+  <div class="meta">
+    <span id="count">1 / 1</span>
+    <div class="bar" aria-hidden="true"><i id="barFill"></i></div>
+    <span id="knownCount">0 known</span>
+  </div>
+
+  <div class="stage">
+    <div class="card" id="card" tabindex="0" role="button" aria-label="Flashcard, press to flip">
+      <div class="face front"><div class="top"><span id="fSet"></span><span class="stamp" id="fLv"></span></div>
+        <div class="body"><p class="term" id="fTerm"></p></div>
+        <div class="hint">Select the card to reveal the definition</div></div>
+      <div class="face back"><div class="top"><span id="bSet"></span><span class="stamp" id="bLv"></span></div>
+        <div class="body"><div class="bterm" id="bTerm"></div><p id="bDef"></p></div></div>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button class="btn prev" id="prev" aria-label="Previous card">&larr; Previous</button>
+    <button class="btn learn" id="learn">Requires Review</button>
+    <button class="btn know" id="know">Mastered</button>
+    <button class="btn next" id="next" aria-label="Next card">Next &rarr;</button>
+  </div>
+  <div class="keys"><kbd>Space</kbd> Reveal &nbsp; <kbd>&larr;</kbd> <kbd>&rarr;</kbd> Navigate &nbsp; <kbd>K</kbd> Mastered &nbsp; <kbd>L</kbd> Requires Review</div>
+
+  <section class="catalog">
+    <h2>Index of Terms <button class="chip" id="toggleList" aria-pressed="false">Display Full Index</button></h2>
+    <div class="list" id="list" hidden></div>
+  </section>
+
+  <footer>Prepared by Andrew Kim for the Unit 2 Assessment in Advanced Placement United States History</footer>
+</div>
+
+<script>
+const D=[
+// WESTERN
+["w",3,"Native Americans & Western Tribes","Plains and western nations (Sioux, Cheyenne, Comanche, Apache, Nez Perce, Navajo) whose lives centered on the buffalo and seasonal movement. From 1860 to 1890 the U.S. pushed them onto reservations through treaties, war, and destruction of the buffalo. Miners, settlers, and railroads kept taking treaty land, which set off the Indian Wars. By 1890 nearly every tribe was confined to reservations and targeted for assimilation through the Dawes Act and boarding schools. Significance: federal policy moved from removal, to concentration, to forced assimilation."],
+["w",2,"Comanche","Powerful horse nation of the southern Plains (Texas, Oklahoma) that controlled trade and raiding. Accepted a reservation at Medicine Lodge (1867); final resistance ended after the Red River War (1875)."],
+["w",2,"Medicine Lodge Creek Treaty","1867 treaties in Kansas where the Comanche, Kiowa, Southern Cheyenne, and Arapaho agreed to reservations in Indian Territory (Oklahoma) for promised supplies. The U.S. often failed to deliver, causing more conflict."],
+["w",2,"Bosque Redondo","Reservation in eastern New Mexico where the Army forced about 9,000 Navajo after the Long Walk (1864). Starvation and disease killed many until an 1868 treaty let the Navajo return home."],
+["w",2,"Chief Joseph","Nez Perce leader who in 1877 led his people on a 1,100+ mile retreat toward Canada instead of moving to a reservation. Surrendered just short of the border, famously vowing to fight no more forever."],
+["w",2,"Sand Creek Massacre","1864, Colorado Territory. Col. John Chivington's militia attacked a peaceful Cheyenne and Arapaho camp, killing about 150 to 200 people, mostly women, children, and elders. Intensified the Plains wars."],
+["w",2,"“Kill the Indian, Save the Man”","Motto of Richard Henry Pratt, founder of Carlisle Indian School (1879). Meant erasing Native language, religion, and identity so children would assimilate into white American culture."],
+["w",3,"Sioux","Largest Plains confederation (Lakota, Dakota, Nakota) on the northern Plains. The 1868 Fort Laramie Treaty guaranteed them the Great Sioux Reservation, including the sacred Black Hills. Gold found there in 1874 brought miners, and the U.S. demanded the land. Led by Sitting Bull and Crazy Horse, they defeated Custer at Little Bighorn (1876) but were forced to surrender within a year. The Ghost Dance and the Wounded Knee Massacre (1890) ended their armed resistance. Significance: the clearest example of broken treaties and Native resistance."],
+["w",2,"Cheyenne","Plains people of the Colorado and Wyoming region. Victims at Sand Creek (1864); the Northern Cheyenne fought beside the Sioux at Little Bighorn."],
+["w",3,"Treaty of Fort Laramie","Two treaties signed at Fort Laramie, Wyoming. The 1851 treaty set tribal boundaries and protected travelers on the Oregon Trail. The 1868 treaty ended Red Cloud's War, closed the Bozeman Trail forts, and created the Great Sioux Reservation, including the Black Hills, for Sioux use forever. After gold was found in 1874, the U.S. broke the treaty and seized the Black Hills, leading to the Great Sioux War. In 1980 the Supreme Court ruled the land was taken illegally; the Sioux refused payment and still want the land back. Significance: the textbook case of the U.S. breaking its word."],
+["w",3,"Battle of Little Bighorn","June 25 to 26, 1876, in Montana Territory. Lt. Col. George Custer and the 7th Cavalry attacked a huge camp of Lakota, Northern Cheyenne, and Arapaho led by Sitting Bull and Crazy Horse. Custer and about 260 soldiers were killed, known as Custer's Last Stand. It was the greatest Native victory of the Plains wars. Public outrage pushed the Army to intensify its campaigns, and within a year most Sioux were on reservations and the Black Hills were taken. Significance: marked the beginning of the end of the Indian Wars."],
+["w",2,"Wounded Knee","December 29, 1890, South Dakota. While disarming a Lakota band during the Ghost Dance scare, the 7th Cavalry killed about 250 to 300 men, women, and children. Seen as the end of the Indian Wars."],
+["w",2,"Sitting Bull","Hunkpapa Lakota holy man and leader at Little Bighorn. Fled to Canada, surrendered in 1881, briefly toured with Buffalo Bill. Killed by reservation police in 1890 during the Ghost Dance crackdown."],
+["w",2,"Ghost Dance","Religious movement started by the Paiute prophet Wovoka (about 1889) promising the return of the buffalo and ancestors and the departure of whites. Officials feared it among the Lakota, which led to Wounded Knee."],
+["w",3,"Homestead Act","1862 law signed by Lincoln granting 160 acres of western public land to any adult citizen or intended citizen, including women, immigrants, and freedpeople. Settlers paid a small fee and had to live on and farm the land for five years. The goal was to fill the West with small family farms. About 1.6 million claims were made, but dry land, the small plot size on the Plains, and speculators made many claims fail. The land came from Native nations. Significance: the federal government directly fueled western settlement."],
+["w",1,"Assimilation","Absorbing a group into the dominant culture so it gives up its own."],
+["w",3,"Dawes Act","The Dawes Severalty Act of 1887, sponsored by Sen. Henry Dawes. It broke up reservations owned in common into individual plots (160 acres per family head) to turn Native people into farmers. Native people could gain citizenship after 25 years, and leftover “surplus” land was sold to white settlers. Native landholding fell from about 138 million acres in 1887 to about 48 million by 1934. It was ended by the Indian Reorganization Act (1934). Significance: an assimilation policy that destroyed tribal community life and the Native land base."],
+["w",3,"Native American Boarding Schools (Carlisle)","Carlisle Indian Industrial School opened in Pennsylvania in 1879 under Richard Henry Pratt and became the model for hundreds of federal boarding schools. Children were often taken by force, given new names, had their hair cut, and were punished for speaking Native languages. They learned English, Christianity, and manual trades. Harsh discipline and disease killed many students. The goal was to assimilate the next generation. Significance: deep cultural loss and trauma passed down for generations."],
+["w",3,"Transcontinental Railroad","Authorized by the Pacific Railway Act (1862), which gave railroads land grants and loans. The Central Pacific built east from Sacramento and the Union Pacific built west from Omaha. They met at Promontory Summit, Utah, on May 10, 1869, with a golden spike. Chinese and Irish immigrants and Civil War veterans did most of the labor. Cross-country travel dropped from months to about a week, creating a national market and spurring towns, farms, and the cattle industry. It also sped up buffalo slaughter and Native land loss, and led to the Crédit Mobilier scandal. Significance: united the nation economically and accelerated western conquest."],
+["w",2,"Central Pacific","Railroad company that built east from Sacramento through the Sierra Nevada. Owned by the “Big Four” (including Leland Stanford) and built mostly by Chinese laborers."],
+["w",2,"Union Pacific","Railroad company that built west from Omaha across the Plains, using Irish immigrants and Civil War veterans. Tied to the Crédit Mobilier corruption scandal."],
+["w",2,"Chinese Laborers","About 12,000+ Chinese immigrants made up most of the Central Pacific workforce, doing the most dangerous blasting for lower pay. Faced heavy discrimination, leading to the Chinese Exclusion Act (1882)."],
+["w",2,"Chisholm Trail","Cattle trail used after the Civil War to drive Texas longhorns to the railroad in Abilene, Kansas, for shipment east. Key route of the long drive era (late 1860s to 1880s)."],
+["w",1,"Cowboys","Ranch hands who herded cattle on the long drives; many were Black or Mexican vaqueros."],
+["w",1,"Buffalo","Bison; the center of Plains life. Hunted from about 30 million to under 1,000 by 1889."],
+["w",2,"William Cody","“Buffalo Bill,” a former Army scout and buffalo hunter who turned the frontier into entertainment."],
+["w",2,"Buffalo Bill's Wild West Show","Touring show (from 1883) with staged battles, sharpshooting, and Native performers, including Sitting Bull. Created a romantic, mythic image of the West for U.S. and European audiences."],
+["w",2,"Annie Oakley","Ohio sharpshooter and star of Buffalo Bill's show. Became a frontier icon and challenged gender roles of the era."],
+["w",2,"Exodusters","About 20,000+ Black Southerners who moved to Kansas in 1879 to 1880 to escape violence and Jim Crow after Reconstruction ended. Encouraged by Benjamin “Pap” Singleton."],
+// OVERSEAS
+["o",3,"Manifest Destiny","Phrase coined by journalist John O'Sullivan in 1845 for the belief that the U.S. was destined by God to spread across North America. It justified annexing Texas and Oregon and the Mexican-American War (1846 to 1848). It rested on beliefs in Anglo-Saxon superiority and spreading democracy. It was also used to justify removing Native peoples. After the frontier closed, the same idea was stretched to justify overseas expansion. Significance: the ideology behind both continental and overseas growth."],
+["o",3,"Turner's Frontier Thesis","Historian Frederick Jackson Turner presented “The Significance of the Frontier in American History” in Chicago in 1893. Citing the 1890 census, he said the frontier line no longer existed. He argued the frontier had shaped the American character: individualism, democracy, and self-reliance. It also served as a safety valve for people seeking opportunity. With the frontier closed, many Americans asked where the nation would grow next, which helped push interest overseas. Critics note it ignored Native peoples, women, and minorities."],
+["o",3,"Mahan's The Influence of Sea Power Upon History","1890 book by U.S. Navy Captain Alfred Thayer Mahan. He argued that great nations rise through sea power, using Britain as his model. That required a strong navy, a merchant fleet, overseas colonies, and coaling stations. He called for a canal through Central America and bases in the Caribbean and Pacific, including Hawaii. Theodore Roosevelt and Henry Cabot Lodge took his ideas to heart, leading to a large naval buildup. Significance: gave imperialism a military and strategic justification."],
+["o",1,"Imperialism","A strong nation extending political, economic, or military control over weaker lands."],
+["o",3,"American Imperialism","U.S. overseas expansion from about 1867 to 1918. Causes included industrial overproduction and the need for raw materials and new markets (especially after the Panic of 1893), Mahan's naval ideas, Social Darwinism, missionary goals, and the closed frontier. Key gains were Alaska (1867), Hawaii (1898), and Puerto Rico, Guam, and the Philippines after the Spanish-American War, plus control of Cuba. The U.S. also pushed the Open Door in China and built the Panama Canal. Critics in the Anti-Imperialist League said it betrayed democratic ideals, shown by the brutal Philippine-American War. Significance: turned the U.S. into a world power."],
+["o",2,"Anti-Imperialist League","Founded in Boston in 1898 to oppose taking the Philippines. Members included Mark Twain, Andrew Carnegie, Jane Addams, William Jennings Bryan, and Grover Cleveland. Reasons varied: it violated consent of the governed, cost money, threatened cheap labor competition, and for some, racist fears of absorbing nonwhite peoples."],
+["o",2,"Social Darwinism","Applying “survival of the fittest” to nations and races. Used to argue that strong Anglo-Saxon nations were meant to rule weaker ones."],
+["o",1,"Anglo-Saxon","People of English and Germanic descent; seen by expansionists as a superior race."],
+["o",2,"The White Man's Burden","1899 poem by Rudyard Kipling urging the U.S. to take the Philippines. Claimed white nations had a duty to “civilize” nonwhite peoples; a racist, paternalistic justification for empire."],
+["o",1,"Missionaries","Christians who spread their religion and Western values abroad, supporting expansion in places like Hawaii and China."],
+["o",1,"Alaska","Bought from Russia in 1867 for $7.2 million; later valuable for gold, fish, and oil."],
+["o",2,"Seward's Folly","Critics' nickname for Secretary of State William Seward's 1867 purchase of Alaska, seen as a waste until gold strikes in the 1890s proved its value."],
+["o",1,"Hawaii","Pacific islands valued for sugar and Pearl Harbor; annexed by the U.S. in 1898."],
+["o",2,"Queen Liliuokalani","Last monarch of Hawaii. When she tried to restore royal power in 1893, American sugar planters led by Sanford Dole overthrew her with help from U.S. Marines. Hawaii was annexed in 1898."],
+["o",2,"William McKinley","25th President (1897 to 1901). Led the U.S. into the Spanish-American War, annexed Hawaii and the Philippines, and backed the Open Door. Assassinated in 1901, making Theodore Roosevelt president."],
+["o",3,"Spanish-American War","Fought April to August 1898. Causes included Cuba's revolt against Spain (1895), Spanish reconcentration camps, yellow journalism, the de Lôme letter insulting McKinley, U.S. business interests in Cuba, and the USS Maine explosion in Havana Harbor (February 1898). The Teller Amendment promised the U.S. would not annex Cuba. Commodore Dewey destroyed the Spanish fleet at Manila Bay, and the Rough Riders charged San Juan Hill. In the Treaty of Paris, the U.S. gained Puerto Rico, Guam, and the Philippines, and Cuba became a U.S. protectorate. Significance: the U.S. became an overseas empire and a world power."],
+["o",2,"Yellow Journalism","Sensational, exaggerated news from William Randolph Hearst (New York Journal) and Joseph Pulitzer (New York World) that played up Spanish cruelty in Cuba to sell papers and pushed the public toward war."],
+["o",2,"Jingoism","Aggressive, extreme nationalism that favors war; it peaked in the U.S. in 1898."],
+["o",2,"“Remember the Maine!”","Rallying cry after the USS Maine exploded in Havana Harbor (February 15, 1898), killing 266 sailors. The press blamed Spain, though the cause was likely an accident on board."],
+["o",2,"Rough Riders","Volunteer cavalry unit organized by Theodore Roosevelt, made up of cowboys and college athletes. Famous for charging San Juan Hill (July 1898) with Black “Buffalo Soldiers,” which made Roosevelt a national hero."],
+["o",2,"“Splendid Little War”","Secretary of State John Hay's description of the Spanish-American War: short, cheap, and with few battle deaths (most deaths came from disease)."],
+["o",2,"Treaty of Paris (1898)","Ended the Spanish-American War. Spain freed Cuba, gave the U.S. Puerto Rico and Guam, and sold the Philippines for $20 million. The Senate narrowly ratified it after a fierce debate over imperialism."],
+["o",2,"Teller Amendment","1898 addition to the war resolution promising the U.S. would not annex Cuba and would leave Cubans to govern themselves. Undercut later by the Platt Amendment."],
+["o",2,"Emilio Aguinaldo","Filipino revolutionary who fought Spain alongside the U.S., then declared Philippine independence in 1898. Led the fight against U.S. rule in the Philippine-American War (1899 to 1902) until captured in 1901."],
+["o",2,"Open Door Policy","Secretary of State John Hay's notes (1899 to 1900) asking imperial powers to give all nations equal trading rights in China and respect China's independence. Protected U.S. trade access."],
+["o",2,"Boxer Rebellion","1900 uprising by a Chinese nationalist group against foreigners and Christians. An eight-nation force, including U.S. troops, crushed it, and Hay reaffirmed the Open Door."],
+["o",2,"Gentlemen's Agreement","1907 deal between Theodore Roosevelt and Japan: Japan limited laborers emigrating to the U.S., and San Francisco ended segregation of Japanese students."],
+["o",2,"Platt Amendment","1901 terms forced into Cuba's constitution letting the U.S. intervene in Cuba, limiting its treaties, and giving the U.S. a naval base at Guantánamo Bay. Made Cuba a U.S. protectorate until 1934."],
+["o",3,"Teddy Roosevelt & Big Stick Diplomacy","Theodore Roosevelt was president from 1901 to 1909. His motto, “speak softly and carry a big stick,” meant negotiating calmly while backing words with military power. He expanded the navy and sent the Great White Fleet around the world. In Latin America he issued the Roosevelt Corollary, backed Panama's revolt from Colombia to secure the canal, and stepped into the Dominican Republic's debts. He also negotiated the end of the Russo-Japanese War (1905), winning the Nobel Peace Prize. Significance: made the U.S. an assertive world power and police of the Western Hemisphere."],
+["o",2,"Great White Fleet","Sixteen white-painted U.S. battleships Roosevelt sent around the world (1907 to 1909) to show American naval power, especially to Japan."],
+["o",3,"Monroe Doctrine","Announced by President James Monroe in 1823 and written mostly by Secretary of State John Quincy Adams. It warned European powers not to create new colonies or interfere in the Western Hemisphere. In return, the U.S. would stay out of European affairs. It came as Latin American nations won independence from Spain. At first the U.S. could not enforce it, so Britain's navy did. Roosevelt later expanded it with the Roosevelt Corollary (1904). Significance: claimed the Western Hemisphere as the U.S. sphere of influence."],
+["o",2,"Roosevelt Corollary","1904 addition to the Monroe Doctrine saying the U.S. could act as an “international police power” in Latin America if nations failed to pay debts or keep order, to keep Europe out. First used in the Dominican Republic (1905)."],
+["o",2,"Panama Canal","Shortcut between the Atlantic and Pacific for trade and the navy. When Colombia refused U.S. terms, Roosevelt backed Panama's 1903 revolt and got the Canal Zone. Built 1904 to 1914 at the cost of thousands of workers' lives."],
+["o",2,"Taft's Dollar Diplomacy","President William Howard Taft (1909 to 1913) used U.S. investment and loans instead of force to gain influence in Latin America and East Asia, though he still sent troops (Nicaragua, 1912)."],
+["o",2,"Wilson's Moral Diplomacy","President Woodrow Wilson (1913 to 1921) said U.S. foreign policy should promote democracy and morality, yet he still sent troops into Mexico, Haiti, and the Dominican Republic."],
+// GUIDING QUESTIONS
+["q",0,"What motivated westward expansion?","Economic: cheap land (Homestead Act), gold and silver, cattle, railroads. Social: fresh starts for immigrants, freedpeople (Exodusters), and farmers. Political: Manifest Destiny and federal support through land grants and the Army."],
+["q",0,"Who settled the West?","Indigenous peoples already there, plus ranchers, cowboys, farmers, miners, Chinese and Irish railroad workers, Exodusters, outlaws, politicians, and mythmakers like Buffalo Bill."],
+["q",0,"How did Native and white cultures shape each other?","Native peoples adapted with horses, guns, and trade, then resisted through war and the Ghost Dance. Whites adopted Native place names, trails, and romanticized Native life in shows, while trying to erase Native culture through reservations and schools."],
+["q",0,"What did federal laws and military action show?","The government actively drove expansion: land grants, the Homestead Act, railroad subsidies, broken treaties, Army campaigns, and the Dawes Act all served settlers at Native expense."],
+["q",0,"Effects of expansion on Native tribes?","Short term: war, massacres, reservations, buffalo destroyed, starvation. Long term: loss of about two thirds of remaining land (Dawes Act), cultural loss from boarding schools, and poverty that lasted generations."],
+["q",0,"Impact of the Transcontinental Railroad?","Linked East and West into one national market, sped up settlement and the cattle and mining booms, created towns, and fueled big business. It also killed the buffalo, took Native land, and relied on exploited immigrant labor."],
+["q",0,"How did industrialization lead to imperialism?","Cause: factories made more than Americans could buy, and the Panic of 1893 made new markets urgent. Effect: the U.S. sought colonies, trade (Open Door), raw materials, and naval bases to protect shipping."],
+["q",0,"Justifications for overseas expansion?","Economic markets, naval strategy (Mahan), Social Darwinism and Anglo-Saxon superiority, the “White Man's Burden,” missionary work, and the closed frontier (Turner)."],
+["q",0,"“Perfect storm” leading to war with Spain?","Cuban revolt and Spanish cruelty, yellow journalism, the de Lôme letter, the Maine explosion, U.S. investments in Cuban sugar, jingoism, and expansionists like Roosevelt wanting a stronger global role."],
+["q",0,"What did the U.S. gain from the Spanish-American War?","Puerto Rico, Guam, and the Philippines, plus control of Cuba through the Platt Amendment. Hawaii was annexed during the war too."],
+["q",0,"How did self-determination clash with U.S. conduct?","The U.S. said it fought to free Cuba, then controlled Cuba with the Platt Amendment and denied Filipino independence, fighting a brutal war against Aguinaldo. It ruled people without their consent."],
+["q",0,"Why build a canal across Panama?","To cut the long trip around South America, move the navy quickly between oceans (Mahan), and boost trade. The 1898 voyage of the USS Oregon showed how slow the old route was."]
+];
+const SETN={w:"Western Expansion",o:"Overseas Expansion",q:"Guiding Question"};
+const $=id=>document.getElementById(id);
+let known=new Set();
+try{known=new Set(JSON.parse(localStorage.getItem("u2known")||"[]"))}catch(e){}
+const save=()=>{try{localStorage.setItem("u2known",JSON.stringify([...known]))}catch(e){}};
+let set="all",lv=new Set([1,2,3]),hideK=false,shuffled=false,order=[],pos=0;
+
+function build(){
+  const cur=order[pos];
+  order=D.map((c,i)=>i).filter(i=>{const c=D[i];
+    if(set!=="all"&&c[0]!==set)return false;
+    if(c[0]!=="q"&&!lv.has(c[1]))return false;
+    if(hideK&&known.has(D[i][2]))return false;return true});
+  if(shuffled){for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}}
+  const k=order.indexOf(cur);pos=k>=0?k:0;render();renderList();
+}
+function render(){
+  const card=$("card");card.classList.remove("flipped");
+  const total=order.length;
+  $("count").textContent=total?`${pos+1} / ${total}`:"0 / 0";
+  const kn=D.filter(c=>known.has(c[2])).length;
+  $("knownCount").textContent=`${kn} of ${D.length} mastered`;
+  $("barFill").style.width=(kn/D.length*100)+"%";
+  if(!total){$("fTerm").textContent="All terms in this selection have been mastered.";$("fSet").textContent="";$("fLv").hidden=true;$("bTerm").textContent="";$("bDef").textContent="";return}
+  const c=D[order[pos]];const lvl=c[1]?"Level "+c[1]:"Short Answer";
+  $("fLv").hidden=false;
+  $("fSet").textContent=SETN[c[0]];$("bSet").textContent=SETN[c[0]];
+  $("fLv").textContent=lvl;$("bLv").textContent=lvl;
+  $("fTerm").innerHTML=c[2]+(known.has(c[2])?' <span class="done-tick">&#10003;</span>':"");
+  $("bTerm").textContent=c[2];$("bDef").textContent=c[3];
+  setTimeout(()=>{document.querySelector(".back .body").scrollTop=0},0);
+}
+function renderList(){
+  const L=$("list");
+  L.innerHTML=order.map(i=>{const c=D[i];return `<div class="item${known.has(c[2])?" known":""}"><div class="lv">${c[1]?"L"+c[1]:"Q"}</div><div><b>${c[2]}</b><span>${c[3]}</span></div></div>`}).join("")||'<div class="item"><div></div><div><span>No terms match the selected filters.</span></div></div>';
+}
+const flip=()=>{if(order.length)$("card").classList.toggle("flipped")};
+const move=d=>{if(!order.length)return;pos=(pos+d+order.length)%order.length;render()};
+function mark(k){if(!order.length)return;const t=D[order[pos]][2];k?known.add(t):known.delete(t);save();
+  if(hideK&&k){build();}else{move(1)}renderList();}
+$("card").addEventListener("click",flip);
+$("prev").onclick=()=>move(-1);$("next").onclick=()=>move(1);
+$("know").onclick=()=>mark(true);$("learn").onclick=()=>mark(false);
+document.addEventListener("keydown",e=>{if(e.target.tagName==="BUTTON"&&(e.key===" "||e.key==="Enter"))return;
+  if(e.key===" "){e.preventDefault();flip()}else if(e.key==="ArrowRight")move(1);else if(e.key==="ArrowLeft")move(-1);
+  else if(e.key==="k"||e.key==="K")mark(true);else if(e.key==="l"||e.key==="L")mark(false)});
+$("card").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();flip()}});
+document.querySelectorAll("[data-set]").forEach(b=>b.onclick=()=>{set=b.dataset.set;document.querySelectorAll("[data-set]").forEach(x=>x.setAttribute("aria-pressed",x===b));pos=0;build()});
+document.querySelectorAll("[data-lv]").forEach(b=>b.onclick=()=>{const v=+b.dataset.lv;
+  if(lv.has(v)&&lv.size>1)lv.delete(v);else lv.add(v);
+  document.querySelectorAll("[data-lv]").forEach(x=>x.setAttribute("aria-pressed",lv.has(+x.dataset.lv)));build()});
+$("hideKnown").onclick=function(){hideK=!hideK;this.setAttribute("aria-pressed",hideK);build()};
+$("shuffle").onclick=function(){shuffled=!shuffled;this.setAttribute("aria-pressed",shuffled);pos=0;order=[];build()};
+$("toggleList").onclick=function(){const L=$("list");L.hidden=!L.hidden;this.setAttribute("aria-pressed",!L.hidden);this.textContent=L.hidden?"Display Full Index":"Hide Index"};
+build();
+</script>
+
+</body></html>
